@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Quotes Generator</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        font-family: "Caveat", cursive;
+        background-color: #f7f6f2;
+      }
+      .wrapper {
+        width: 750px;
+        height: auto;
+        border: 1rem double #c2f0d1;
+        margin-top: 100px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 1rem;
+      }
+      .quote-section {
+        align-self: flex-start;
+        flex: 3;
+        color: rgb(140, 146, 172);
+      }
+      .image-section {
+        align-self: flex-end;
+        justify-items: center;
+        flex: 1;
+      }
+      .image-section img {
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        object-fit: fill;
+        border: 0.3rem solid #c2f0d1;
+      }
+      .quote {
+        font-size: 1.7em;
+      }
+      .author {
+        font-size: 1.2em;
+      }
+      #generate {
+        margin: 15px 300px;
+        width: 150px;
+        height: 50px;
+        font-size: 1em;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body onload="whenLoad()">
+    <div class="container">
+      <div class="wrapper">
+        <div class="quote-section">
+          <q class="quote"> </q>
+          <span class="author"></span>
+        </div>
+        <div class="image-section">
+          <img src="" alt="photo" />
+        </div>
+      </div>
+      <button id="generate">Generate Quotes</button>
+    </div>
+  </body>
+  <script>
+    let quote = document.querySelector(".quote");
+    let author = document.querySelector(".author");
+    let authorImage = document.querySelector(".image-section img");
+    let generateQuote = document.getElementById("generate");
+
+    let quotesList = [
+      {
+        quotation:
+          "If I loved you less, I might be able to talk about it more.",
+        novelist: "Jane Austen",
+        photo:
+          "https://www.thefamouspeople.com/profiles/images/jane-austen-21.jpg",
+      },
+      {
+        quotation:
+          "A mother's arms are made of tenderness and children sleep soundly in them.",
+        novelist: "Victor Hugo",
+        photo:
+          "https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/07/05/12/Victor-Hugo-cropped.jpg?width=1200",
+      },
+      {
+        quotation:
+          "You see, loneliness is the price we have to pay for being born in this modern age, so full of freedom, independence, and our own egoistical selves.",
+        novelist: "Natsume Sōseki",
+        photo:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNTMjuPvylYgpA1djQ9A73NiuRNMoaqNhrhVbugi9obcrVQVz1Ql7J6OZ_AUzRrrfcvi8&usqp=CAU",
+      },
+      {
+        quotation: "The soul is healed by being with children.",
+        novelist: "Fyodor Dostoevsky",
+        photo:
+          "https://www.thefamouspeople.com/profiles/images/fyodor-dostoevsky-8.jpg",
+      },
+      {
+        quotation:
+          "You can tell whether a man is clever by his answers. You can tell whether a man is wise by his questions.",
+        novelist: "Naguib Mahfouz",
+        photo:
+          "https://www.nobelprize.org/images/mahfouz-13400-content-portrait-mobile-tiny.jpg",
+      },
+      {
+        quotation:
+          "Respect was invented to cover the empty place where love should be.",
+        novelist: "Leo Tolstoy",
+        photo:
+          "https://www.thoughtco.com/thmb/yBqXRjiibiEnfABNdOIqImPtOps=/2719x2121/filters:fill(auto,1)/GettyImages-3088579-ba5869cf16484fb3a31edb588a63d187.jpg",
+      },
+      {
+        quotation: "Love all, trust a few, do wrong to none.",
+        novelist: "William Shakespeare",
+        photo:
+          "https://images.theconversation.com/files/329522/original/file-20200421-82672-10gj7rb.jpg?ixlib=rb-1.1.0&rect=0%2C15%2C2600%2C2576&q=45&auto=format&w=926&fit=clip",
+      },
+
+      {
+        quotation:
+          "Some of us think holding on makes us strong; but sometimes it is letting go.",
+        novelist: "Hermann Hesse",
+        photo:
+          "https://www.laphamsquarterly.org/sites/default/files/styles/tall_rectangle_custom_user_small_2x/public/images/contributor/hesse_360x450.jpg?itok=LbDYbLzJ&timestamp=1409326735",
+      },
+      {
+        quotation:
+          "The human heart has hidden treasures, In secret kept, in silence sealed; The thoughts, the hopes, the dreams, the pleasures, Whose charms were broken if revealed.",
+        novelist: "Charlotte Brontë",
+        photo:
+          "https://images.fineartamerica.com/images-medium-large/2-charlotte-bronte-english-author-science-source.jpg",
+      },
+      {
+        quotation:
+          "In the past, traditional art was based on making manifest what is enduring in man, like love, jealousy, hatred, envy, and greed... . Today art has to look again at these unchanging qualities, because society is no longer unchanging. It is up to art today to show us what has become of these unchanging qualities in a world which is moving and changing.",
+        novelist: "Tawfiq al-Hakim",
+        photo: "https://images.gr-assets.com/authors/1428577422p5/13757095.jpg",
+      },
+    ];
+    generateQuote.addEventListener("click", () => {
+      let quotations = Math.floor(Math.random() * quotesList.length);
+      quote.textContent = quotesList[quotations].quotation;
+      author.textContent = `~${quotesList[quotations].novelist}~`;
+      authorImage.src = quotesList[quotations].photo;
+    });
+    function whenLoad() {
+      quote.textContent = quotesList[quotesList.length - 1].quotation;
+      author.textContent = `~${quotesList[quotesList.length - 1].novelist}~`;
+      authorImage.src = quotesList[quotesList.length - 1].photo;
+    }
+  </script>
+</html>
